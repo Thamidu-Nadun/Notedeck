@@ -11,12 +11,12 @@ const Hero = () => {
             All in Markdown.
           </span>
         </h2>
-        <p class="text-slate-300 md:text-base line-clamp-3 max-md:px-2 text-center max-w-md mt-2">
+        <p className="text-slate-300 md:text-base line-clamp-3 max-md:px-2 text-center max-w-md mt-2">
           Write slides like you write code — with Markdown. Generate beautiful, responsive presentations in seconds, ready to share, embed, or present live. No design skills required.
         </p>
         <div className="flex justify-center mt-5 gap-4">
           <Button btn_title="Start Creating" icon={<ArrowRight size={34} />} />
-          <button class="bg-white/10 border border-white/15 rounded-xl hover:opacity-75 px-6 py-3 text-white">
+          <button className="bg-white/10 border border-white/15 rounded-xl hover:opacity-75 px-6 py-3 text-white">
             Learn More
           </button>
         </div>
