@@ -1,8 +1,10 @@
+import {useEffect, useRef} from 'react';
 import Reveal from 'reveal.js';
 import Markdown from 'reveal.js/plugin/markdown/markdown.esm';
+import Highlight from 'reveal.js/plugin/highlight/highlight.esm.js';
 import 'reveal.js/dist/reveal.css';
 import 'reveal.js/dist/theme/black.css';
-import {useEffect, useRef} from 'react';
+import 'reveal.js/plugin/highlight/monokai.css';
 
 const SlideWrapper = ({markdown = '# Example'}) => {
   const deckDivRef = useRef (null);
@@ -13,12 +15,15 @@ const SlideWrapper = ({markdown = '# Example'}) => {
 
     const deck = new Reveal (deckDivRef.current, {
       transition: 'slide',
-      plugins: [Markdown],
+      plugins: [Markdown, Highlight],
+      highlight: {
+        escapeHTML: false,
+      },
     });
 
     deck.initialize ().then (() => {
-      deck.sync ();
       deckRef.current = deck;
+      deck.sync ();
     });
 
     return () => {
@@ -33,13 +38,25 @@ const SlideWrapper = ({markdown = '# Example'}) => {
     };
   }, []);
 
+  useEffect (
+    () => {
+      if (deckRef.current) {
+        deckRef.current.sync ();
+      }
+    },
+    [markdown]
+  );
+
   return (
     <div className="reveal" ref={deckDivRef} style={{height: '100vh'}}>
       <div className="slides">
         <section data-markdown="">
-          <script type="text/template">
-            {markdown}
-          </script>
+          <textarea
+            data-template
+            style={{display: 'none'}}
+            value={markdown}
+            readOnly
+          />
         </section>
       </div>
     </div>

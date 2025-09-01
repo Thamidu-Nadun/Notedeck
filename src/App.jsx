@@ -1,29 +1,17 @@
 import React, {lazy, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
-const Home = lazy (() => import ('./layout/Home/Home'));
-const SlideWrapper = lazy (() =>
-  import ('./components/SlideWrapper/SlideWrapper')
-);
-
-const mdContent = `
-# Slide 1
-
-This is the first slide.
-
----
-
-# Slide 2
-
-This is the second slide.
-`.trim();
+const Home = lazy (() => import ('./pages/Home/Home'));
+const SlidesView = lazy (() => import ('./pages/SlidesView/SlidesView'));
+const SlideCreate = lazy (() => import ('./pages/SlideCreate/SlideCreate'));
 
 const App = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/slides" element={<SlideWrapper markdown={mdContent} />} />
+        <Route path="/slides" element={<SlidesView />} />
+        <Route path="/slides/create" element={<SlideCreate />} />
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>
     </Suspense>

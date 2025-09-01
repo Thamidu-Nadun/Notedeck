@@ -4,9 +4,12 @@ import FeatureCard from './FeatureCard';
 export default function Feature () {
   return (
     <div>
-      <h2 className="text-4xl text-white text-center font-sans">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl text-white text-center font-semibold font-sans">
         What we offer
       </h2>
+      <p className="text-center text-gray-400 md:text-lg mt-2">
+        Turn your markdown notes into a beautiful, interactive presentation.
+      </p>
       <div className="flex flex-col md:flex-row items-center justify-center">
         <img
           className="max-w-2xl w-full"
