@@ -9,3 +9,11 @@ body {
 .reveal {
   height: 100vh;
 }
+
+section {
+  @apply h-screen w-screen px-4 py-2;
+}
+
+.brand-color {
+  color: #ffb347;
+}

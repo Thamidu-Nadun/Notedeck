@@ -29,7 +29,7 @@ const Testimonials = () => {
   ];
 
   const CreateCard = ({card}) => (
-    <div className="p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0">
+    <div className="bg-amber-50 p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0">
       <div className="flex gap-2">
         <img
           className="size-11 rounded-full"
@@ -90,7 +90,7 @@ const Testimonials = () => {
   );
 
   return (
-    <div className="h-screen">
+    <section>
       <style>{`
             @keyframes marqueeScroll {
                 0% { transform: translateX(0%); }
@@ -106,26 +106,29 @@ const Testimonials = () => {
             }
         `}</style>
 
-      <div className="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative">
-        <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent" />
+      <div className="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative mt-12">
+        <h2 className="text-4xl text-white text-center font-semibold">
+          Testimonials
+        </h2>
+        <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-gray-800/20 to-transparent rounded-2xl" />
         <div className="marquee-inner flex transform-gpu min-w-[200%] pt-10 pb-5">
           {[...cardsData, ...cardsData].map ((card, index) => (
             <CreateCard key={index} card={card} />
           ))}
         </div>
-        <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent" />
+        <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-gray-800/20 to-transparent" />
       </div>
 
       <div className="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative">
-        <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent" />
+        <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-gray-800/20 to-transparent" />
         <div className="marquee-inner marquee-reverse flex transform-gpu min-w-[200%] pt-10 pb-5">
           {[...cardsData, ...cardsData].map ((card, index) => (
             <CreateCard key={index} card={card} />
           ))}
         </div>
-        <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent" />
+        <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-gray-800/20 to-transparent" />
       </div>
-    </div>
+    </section>
   );
 };
 

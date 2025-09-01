@@ -3,17 +3,17 @@ import Navbar from '../../Components/Navbar/Navbar';
 import About from './About/About';
 import Demo from './Demo/Demo';
 import Faq from './FAQ/FAQ';
+import Feature from './Feature/Feature';
 import Hero from './Hero/Hero';
 import Pricing from './Pricing/Pricing';
 import Testimonials from './Testimonials/Testimonials';
 const Home = () => {
   return (
-    <div className="w-screen relative">
+    <div className="w-screen absolute bg-black">
       <Navbar nav_brand={<h2>MyApp</h2>} />
-      {/* <Temp /> */}
       <Hero />
       <Demo />
-      <About />
+      <Feature />
       <Pricing />
       <Testimonials />
       <Faq />
