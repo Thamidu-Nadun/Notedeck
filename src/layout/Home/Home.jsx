@@ -10,7 +10,7 @@ import Testimonials from './Testimonials/Testimonials';
 const Home = () => {
   return (
     <div className="w-screen absolute bg-black">
-      <Navbar nav_brand={<h2>MyApp</h2>} />
+      <Navbar nav_brand={<h2>Notedeck</h2>} />
       <Hero />
       <Demo />
       <Feature />
