@@ -9,10 +9,14 @@ const SlideWrapper = lazy (() =>
 const mdContent = `
 # Slide 1
 
+This is the first slide.
+
 ---
 
-#
-`.trim ();
+# Slide 2
+
+This is the second slide.
+`.trim();
 
 const App = () => {
   return (

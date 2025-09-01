@@ -34,7 +34,7 @@ const SlideWrapper = ({markdown = '# Example'}) => {
   }, []);
 
   return (
-    <div className="reveal" ref={deckDivRef}>
+    <div className="reveal" ref={deckDivRef} style={{height: '100vh'}}>
       <div className="slides">
         <section data-markdown="">
           <script type="text/template">
