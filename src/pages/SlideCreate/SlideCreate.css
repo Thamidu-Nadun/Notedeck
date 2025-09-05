@@ -1,0 +1,18 @@
+.text_box {
+  position: relative;
+}
+.text_box::after {
+  content: "markdown";
+  background: var(--color-indigo-500);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  position: absolute;
+  inset: 0;
+  top: -0.5rem;
+  height: 2rem;
+  width: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem 0.5rem 0.5rem 0;
+}
