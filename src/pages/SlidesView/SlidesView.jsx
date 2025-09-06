@@ -1,5 +1,5 @@
 import {useLocation} from 'react-router-dom';
-import SlideWrapper from '../../components/SlideWrapper/SlideWrapper';
+import SlideWrapper from '../../Components/SlideWrapper/SlideWrapper';
 
 const mdContent = `
 # Slide 1
