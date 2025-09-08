@@ -57,18 +57,18 @@ const SlideCreate = () => {
               Simply paste your Markdown content below, and we'll transform it into a beautiful, ready-to-present slideshow.
             </p>
           </div>
-          <div className="flex items-center justify-end gap-2 w-full m-4 px-1">
+          <div className="flex flex-col md:flex-row items-center justify-end gap-2 w-full my-4 md:my-2 md:m-4 px-1">
             <input
               type="url"
               name="github-url"
               placeholder="https://github.com/example/repo/main/slides.md"
               ref={urlRef}
               pattern="https://github\.com/.+/.+\.md"
-              className="text-indigo-300 border border-indigo-400/65 focus:border-indigo-500 outline-none rounded-lg pl-2 py-1 bg-gray-800 placeholder:text-gray-500 w-1/2 caret-amber-400 valid:text-green-300 invalid:text-red-300 transition duration-300"
+              className="text-sm md:text-md text-indigo-300 border border-indigo-400/65 focus:border-indigo-500 outline-none rounded-lg pl-2 py-1 bg-gray-800 placeholder:text-gray-500 w-full md:w-1/2 caret-amber-400 valid:text-green-300 invalid:text-red-300 transition duration-300"
             />
             <button
               onClick={import_markdown_from_github}
-              className="px-4 py-1 opacity-65 hover:opacity-100 border border-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition duration-300"
+              className="p-1 md:px-4 md:py-1 opacity-65 hover:opacity-100 border border-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition duration-300"
             >
               Import from GitHub
             </button>
@@ -77,7 +77,7 @@ const SlideCreate = () => {
             <textarea
               value={markdown}
               onChange={e => setMarkdown (e.target.value)}
-              className="w-full h-full outline-none text-amber-50 font-mono text-2xl sm:text-xl md:text-lg pl-3 pt-4 caret-amber-400 block bg-gray-900 border-gray-700 rounded-bottom-xl rounded-tr-xl shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder-gray-500 resize-non"
+              className="w-full h-full outline-none text-amber-50 font-mono text-lg sm:text-xl md:text-lg pl-3 pt-4 caret-amber-400 block bg-gray-900 border-gray-700 rounded-bottom-xl rounded-tr-xl shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder-gray-500 resize-non"
               placeholder={placeholder}
             />
           </div>
