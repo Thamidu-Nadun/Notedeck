@@ -5,26 +5,27 @@ const Faq = () => {
   const [openIndex, setOpenIndex] = useState (null);
   const faqsData = [
     {
-      question: 'Lightning-Fast Performance',
-      answer: 'Built with speed — minimal load times and optimized rendering.',
+      question: 'Can I turn my Markdown into slides quickly?',
+      answer: 'Yes! Just upload or paste your Markdown, and you’ll get a ready-to-present slide deck instantly.',
     },
     {
-      question: 'Fully Customizable Components',
-      answer: 'Easily adjust styles, structure, and behavior to match your project needs.',
+      question: 'Can I export my presentation to other formats?',
+      answer: 'Absolutely. You can export to HTML, PDF, or PPTX so you can share or present anywhere.',
     },
     {
-      question: 'Responsive by Default',
-      answer: 'Every component are responsive by default — no extra CSS required.',
+      question: 'Can I work with my team on presentations?',
+      answer: 'Yes! Our Pro and Enterprise plans let you collaborate in shared workspaces and leave comments in real-time.',
     },
     {
-      question: 'Tailwind CSS Powered',
-      answer: 'Built using Tailwind utility classes — no extra CSS or frameworks required.',
+      question: 'Does it support diagrams and code?',
+      answer: 'Definitely. You can include Mermaid diagrams, LaTeX math, and syntax-highlighted code blocks in your slides.',
     },
     {
-      question: 'Dark Mode Support',
-      answer: 'All components come ready with light and dark theme support out of the box.',
+      question: 'Will my slides work on mobile devices?',
+      answer: 'Yes, all presentations are responsive, so they look great on phones, tablets, and desktops.',
     },
   ];
+
   return (
     <div className="h-screen">
       <div className="flex flex-col items-center text-center text-slate-700 px-3">
