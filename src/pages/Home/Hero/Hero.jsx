@@ -1,5 +1,6 @@
 import {ArrowRight} from 'lucide-react';
 import Button from '../../../Components/Button/Button';
+import {Link} from 'react-router-dom';
 const Hero = () => {
   return (
     <section className="pt-14 flex justify-center items-center text-center bg-[url(https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/bg-gradient-4.svg)] bg-center bg-cover">
@@ -15,7 +16,12 @@ const Hero = () => {
           Write slides like you write code — with Markdown. Generate beautiful, responsive presentations in seconds, ready to share, embed, or present live. No design skills required.
         </p>
         <div className="flex justify-center mt-5 gap-4">
-          <Button btn_title="Start Creating" icon={<ArrowRight size={34} />} />
+          <Link to="/slides/create">
+            <Button
+              btn_title="Start Creating"
+              icon={<ArrowRight size={34} />}
+            />
+          </Link>
           <button className="bg-white/10 border border-white/15 rounded-xl hover:opacity-75 px-6 py-3 text-white">
             Learn More
           </button>
