@@ -18,18 +18,18 @@ export default function Feature () {
         />
         <div className="space-y-6 px-4 md:px-0">
           <FeatureCard
-            title="Real-Time Analytics"
-            description="Get instant insights into your finances with live dashboards."
+            title="Ready to go presentations"
+            description="Create and customize presentations in minutes."
             icon={<ChartArea size={28} />}
           />
           <FeatureCard
-            title="Seamless Integration"
-            description="Connect with popular accounting software like QuickBooks and Xero."
+            title="Syntax Highlighting"
+            description="Easily add code snippets with syntax highlighting for over 100 languages."
             icon={<Handshake size={28} />}
           />
           <FeatureCard
-            title="AI-Powered Insights"
-            description="Leverage AI to identify trends and optimize your financial strategies."
+            title="Export to your favorite format"
+            description="Export your presentations to PDF, HTML, or even as a powerpoint."
             icon={<Rocket size={28} />}
           />
         </div>
