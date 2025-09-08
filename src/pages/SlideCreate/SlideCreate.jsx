@@ -1,13 +1,14 @@
 import {Save, SquareStack} from 'lucide-react';
 import Button from '../../Components/Button/Button';
 import MainLayout from '../../layout/MainLayout';
-import {useState} from 'react';
+import {useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import './SlideCreate.css';
 
 const SlideCreate = () => {
   const [markdown, setMarkdown] = useState ('');
   const navigate = useNavigate ();
+  const urlRef = useRef ();
 
   let placeholder = `## Slide 1 Title
 ---
@@ -15,6 +16,27 @@ const SlideCreate = () => {
 - Bullet point 2
 ## Slide 2 Title
 ![alt text](image.jpg)`;
+  const import_markdown_from_github = async () => {
+    console.log ('Importing from GitHub');
+    let url = urlRef.current.value
+      .trim ()
+      .replace ('https://github.com/', 'https://raw.githubusercontent.com/')
+      .replace ('/blob/', '/');
+    console.log (url);
+
+    try {
+      let res = await fetch (url);
+      if (!res.ok) {
+        throw new Error (`HTTP error! Status: ${res.status}`);
+      }
+      let data = await res.text ();
+      console.log (data);
+      setMarkdown (data);
+    } catch (error) {
+      console.error ('Fetch error:', error.message);
+    }
+  };
+
   const submitMarkdown = () => {
     navigate ('/slides', {state: {markdown}});
     console.log (markdown);
@@ -35,6 +57,22 @@ const SlideCreate = () => {
               Simply paste your Markdown content below, and we'll transform it into a beautiful, ready-to-present slideshow.
             </p>
           </div>
+          <div className="flex items-center justify-end gap-2 w-full m-4 px-1">
+            <input
+              type="url"
+              name="github-url"
+              placeholder="https://github.com/example/repo/main/slides.md"
+              ref={urlRef}
+              pattern="https://github\.com/.+/.+\.md"
+              className="text-indigo-300 border border-indigo-400/65 focus:border-indigo-500 outline-none rounded-lg pl-2 py-1 bg-gray-800 placeholder:text-gray-500 w-1/2 caret-amber-400 valid:text-green-300 invalid:text-red-300 transition duration-300"
+            />
+            <button
+              onClick={import_markdown_from_github}
+              className="px-4 py-1 opacity-65 hover:opacity-100 border border-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition duration-300"
+            >
+              Import from GitHub
+            </button>
+          </div>
           <div className="bg-gray-600/80 w-full h-full p-2 rounded-b-xl rounded-tr-xl text_box">
             <textarea
               value={markdown}
@@ -44,11 +82,6 @@ const SlideCreate = () => {
             />
           </div>
           <div className="my-4 w-full flex justify-end gap-4">
-            {/* <Button
-              btn_title="Convert to Slides"
-              icon={<Save size={24} />}
-              onClick={submitMarkdown}
-            /> */}
             <button
               onClick={submitMarkdown}
               className="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition duration-300"
