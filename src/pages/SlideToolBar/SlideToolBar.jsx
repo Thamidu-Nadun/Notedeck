@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {Crown, Download, Eye, SaveAll, Check} from 'lucide-react';
 import MainLayout from '../../layout/MainLayout';
 
