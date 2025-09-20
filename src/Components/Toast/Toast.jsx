@@ -1,5 +1,6 @@
-import {createRoot} from 'react-dom/client';
-import {CheckCircle, XCircle, Info, AlertTriangle, Bell, X} from 'lucide-react';
+import {X} from 'lucide-react';
+import {CheckCircle, XCircle, Info, AlertTriangle, Bell} from 'lucide-react';
+
 import './Toast.css';
 
 const icons = {
@@ -18,94 +19,29 @@ const colors = {
   default: 'bg-gray-100 text-gray-800 border-gray-300',
 };
 
-const positionMap = {
-  tr: 'top-4 right-4',
-  tl: 'top-4 left-4',
-  br: 'bottom-4 right-4',
-  bl: 'bottom-4 left-4',
-};
-
-/**
- * 
- * @param {string} title - Title of the toast
- * @param {string} desc - Description of the toast
- * @param {string} type - Type of the toast: 'success', 'error', 'info', 'warning', 'default'
- * @param {number} duration - Duration in milliseconds before auto-dismiss
- * @param {function} onClose - Callback when toast is dismissed 
- * @returns {JSX.Element}
- */
-const Toast = ({title, desc, type = 'default', duration = 3000, onClose}) => {
+const Toast = ({title, desc, type = 'default', onClose}) => {
   const Icon = icons[type] || icons.default;
   const color = colors[type] || colors.default;
 
-  // Auto dismiss
-  setTimeout (() => {
-    onClose ();
-  }, duration);
-
   return (
     <div
-      className={`max-w-sm w-full border rounded-md shadow-lg px-4 py-3 flex gap-3 items-start fadeInUp ${color}`}
+      className={`toast-animate ${color} border-l-4 shadow-lg p-4 mb-4 w-96 max-w-full flex items-start justify-between rounded-md`}
     >
-      <Icon className="w-6 h-6 mt-1 shrink-0" />
-      <div className="flex-1">
-        {title && <strong className="block font-semibold">{title}</strong>}
-        {desc && <p className="text-sm">{desc}</p>}
+      <div className="flex items-start">
+        <Icon className="w-6 h-6 mt-1 mr-3 shrink-0" />
+        <div>
+          <h4 className="font-bold text-lg">{title}</h4>
+          {desc && <p className="text-sm mt-1">{desc}</p>}
+        </div>
       </div>
-      <button onClick={onClose}>
-        <X className="w-4 h-4 opacity-60 hover:opacity-90" />
+      <button
+        onClick={onClose}
+        className="ml-4 text-gray-500 hover:text-gray-700"
+      >
+        <X className="w-5 h-5" />
       </button>
     </div>
   );
 };
-
-const showToast = (
-  title,
-  desc,
-  type = 'default',
-  duration = 3000,
-  position = 'br'
-) => {
-  const pos = positionMap[position] || positionMap['br'];
-
-  const container = document.createElement ('div');
-  container.className = `fixed z-50 ${pos} toast-container pointer-events-none`;
-  document.body.appendChild (container);
-
-  const root = createRoot (container);
-
-  const cleanup = () => {
-    root.unmount ();
-    container.remove ();
-  };
-
-  root.render (
-    <div className="pointer-events-auto">
-      <Toast
-        title={title}
-        desc={desc}
-        type={type}
-        duration={duration}
-        onClose={cleanup}
-      />
-    </div>
-  );
-};
-
-// 🔥 Export utility functions
-export const success = (title, desc, duration = 3000, position = 'br') =>
-  showToast (title, desc, 'success', duration, position);
-
-export const error = (title, desc, duration = 3000, position = 'br') =>
-  showToast (title, desc, 'error', duration, position);
-
-export const info = (title, desc, duration = 3000, position = 'br') =>
-  showToast (title, desc, 'info', duration, position);
-
-export const warning = (title, desc, duration = 3000, position = 'br') =>
-  showToast (title, desc, 'warning', duration, position);
-
-export const toast = (title, desc, duration = 3000, position = 'br') =>
-  showToast (title, desc, 'default', duration, position);
 
 export default Toast;

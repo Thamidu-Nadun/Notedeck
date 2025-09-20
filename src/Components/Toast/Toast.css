@@ -1,14 +1,14 @@
 @keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translateX(10px);
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
 .toast-animate {
-  animation: fadeInUp 5s ease-out;
+  animation: fadeInUp 0.5s ease-out;
 }

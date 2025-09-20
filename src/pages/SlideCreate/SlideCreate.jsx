@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import './SlideCreate.css';
 import {useLocalMarkdown} from '../../hooks/useLocalMarkdown';
 import {from_github} from '../../utils/remoteMD.js';
-import {error, success} from '../../Components/Toast/Toast.jsx';
+import {error, success} from '../../Components/Toast/toastUtils';
 const SlideCreate = () => {
   const [markdown, setMarkdown] = useState ('');
   const navigate = useNavigate ();
@@ -37,14 +37,14 @@ const SlideCreate = () => {
         success (
           'Successfully imported markdown from GitHub!',
           'You can now edit and convert it to slides.',
-          5000,
+          3000,
           'br'
         );
       } else {
         error (
           'Failed to fetch markdown from the provided URL.',
           'Please check the URL and try again.',
-          5000,
+          3000,
           'br'
         );
       }
