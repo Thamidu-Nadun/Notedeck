@@ -15,7 +15,8 @@ This is the second slide.
 
 const SlidesView = () => {
   const location = useLocation ();
-  const {markdown} = location.state || {markdown: mdContent};
+  const markdown =
+    location.state?.markdown || localStorage.getItem ('markdown') || mdContent;
 
   return <SlideWrapper markdown={markdown} />;
 };

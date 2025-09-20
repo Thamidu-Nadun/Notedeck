@@ -1,14 +1,17 @@
 import {Save, SquareStack} from 'lucide-react';
 import Button from '../../Components/Button/Button';
 import MainLayout from '../../layout/MainLayout';
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import './SlideCreate.css';
-
+import {useLocalMarkdown} from '../../hooks/useLocalMarkdown';
+import {from_github} from '../../utils/remoteMD.js';
+import {error, success} from '../../Components/Toast/Toast.jsx';
 const SlideCreate = () => {
   const [markdown, setMarkdown] = useState ('');
   const navigate = useNavigate ();
   const urlRef = useRef ();
+  const localMarkdown = useLocalMarkdown ();
 
   let placeholder = `## Slide 1 Title
 ---
@@ -16,28 +19,43 @@ const SlideCreate = () => {
 - Bullet point 2
 ## Slide 2 Title
 ![alt text](image.jpg)`;
-  const import_markdown_from_github = async () => {
-    console.log ('Importing from GitHub');
-    let url = urlRef.current.value
-      .trim ()
-      .replace ('https://github.com/', 'https://raw.githubusercontent.com/')
-      .replace ('/blob/', '/');
-    console.log (url);
+  useEffect (() => {
+    localMarkdown.loadMarkdown () &&
+      setMarkdown (localMarkdown.loadMarkdown ());
+    document.title = 'Create Presentation - PresenationMD';
+  }, []);
 
-    try {
-      let res = await fetch (url);
-      if (!res.ok) {
-        throw new Error (`HTTP error! Status: ${res.status}`);
+  /**
+   * Import markdown file from GitHub URL
+   */
+  const import_markdown_from_github = async () => {
+    let url = urlRef.current.value;
+    console.log (url);
+    from_github (urlRef.current.value).then (data => {
+      if (data) {
+        setMarkdown (data);
+        success (
+          'Successfully imported markdown from GitHub!',
+          'You can now edit and convert it to slides.',
+          5000,
+          'br'
+        );
+      } else {
+        error (
+          'Failed to fetch markdown from the provided URL.',
+          'Please check the URL and try again.',
+          5000,
+          'br'
+        );
       }
-      let data = await res.text ();
-      console.log (data);
-      setMarkdown (data);
-    } catch (error) {
-      console.error ('Fetch error:', error.message);
-    }
+    });
   };
 
+  /**
+   * Save markdown to localStorage and navigate to slides view
+   */
   const submitMarkdown = () => {
+    localMarkdown.saveMarkdown (markdown);
     navigate ('/slides/actions', {state: {markdown}});
     console.log (markdown);
   };

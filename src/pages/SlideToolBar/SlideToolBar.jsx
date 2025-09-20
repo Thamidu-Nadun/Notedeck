@@ -1,7 +1,8 @@
-import {Crown, Download, Eye, Check, CloudUpload} from 'lucide-react';
+import {useEffect} from 'react';
+import {Crown, Download, Eye, CloudUpload} from 'lucide-react';
 import MainLayout from '../../layout/MainLayout';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {useEffect} from 'react';
+import {useLocalMarkdown} from '../../hooks/useLocalMarkdown.js';
 
 const defaultMarkdownContent = `
 # Sample Presentation
@@ -19,19 +20,26 @@ This is a sample presentation generated from markdown.
 
 /**
  * SlideToolBar Component
- * @param {string} props.markdownContent - The markdown content to be converted into slides.
+ * @param {Object} Location State: {markdown} - React Router location object
  * @returns {JSX.Element}
  * */
 const SlideToolBar = () => {
   const location = useLocation ();
   const navigate = useNavigate ();
+  const localMarkdown = useLocalMarkdown ();
 
-  const {markdown} = location.state || {markdown: defaultMarkdownContent};
+  const markdown =
+    location.state.markdown ||
+    localMarkdown.loadMarkdown () ||
+    defaultMarkdownContent;
   const handleActions = {
     handlePreview: () => {
       navigate ('/slides', {state: {markdown}});
     },
-    handleExport: () => {},
+    handleExport: () => {
+      // navigate ('/slides?print-pdf', {state: {markdown}});
+      window.open (`/slides?print-pdf`, '_blank');
+    },
     handleSaveToCloud: () => {},
   };
   useEffect (() => {
@@ -41,7 +49,7 @@ const SlideToolBar = () => {
   return (
     <MainLayout>
       <div
-        className="h-screen min-h-screen bg-opacity-50 w-screen p-6 flex justify-center items-center bg-repeat"
+        className="h-screen min-h-screen overflow-x-hidden bg-opacity-50 w-screen p-6 flex justify-center items-center bg-repeat"
         style={{
           backgroundImage: "url('/assets/square.svg')",
           backgroundSize: '30px',

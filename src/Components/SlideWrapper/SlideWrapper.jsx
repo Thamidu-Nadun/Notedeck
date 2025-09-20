@@ -19,11 +19,13 @@ const SlideWrapper = ({markdown = '# Example'}) => {
       highlight: {
         escapeHTML: false,
       },
+      pdfSeparateFragments: false,
     });
 
     deck.initialize ().then (() => {
       deckRef.current = deck;
       deck.sync ();
+      deck.layout ();
     });
 
     return () => {
@@ -41,7 +43,10 @@ const SlideWrapper = ({markdown = '# Example'}) => {
   useEffect (
     () => {
       if (deckRef.current) {
-        deckRef.current.sync ();
+        const loadDeck = setTimeout (() => {
+          deckRef.current.sync ();
+        }, 100);
+        return () => clearTimeout (loadDeck);
       }
     },
     [markdown]
