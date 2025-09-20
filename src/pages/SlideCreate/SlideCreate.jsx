@@ -38,7 +38,7 @@ const SlideCreate = () => {
   };
 
   const submitMarkdown = () => {
-    navigate ('/slides', {state: {markdown}});
+    navigate ('/slides/actions', {state: {markdown}});
     console.log (markdown);
   };
   return (
@@ -53,7 +53,7 @@ const SlideCreate = () => {
                 Presentation
               </span>
             </h2>
-            <p class="mt-1 max-w-2xl mx-auto text-md md:text-lg text-gray-400">
+            <p className="mt-1 max-w-2xl mx-auto text-md md:text-lg text-gray-400">
               Simply paste your Markdown content below, and we'll transform it into a beautiful, ready-to-present slideshow.
             </p>
           </div>

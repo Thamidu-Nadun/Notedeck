@@ -41,7 +41,7 @@ body {
 .shine {
   position: relative;
   overflow: hidden;
-  padding: 0.7em 2.7em;
+  /* padding: 0.7em 2.7em; */
   font-size: 15px;
   font-family: inherit;
   border-radius: 0.6em;
