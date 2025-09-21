@@ -1,7 +1,9 @@
 import {ArrowRight} from 'lucide-react';
 import Button from '../../../Components/Button/Button';
 import {Link} from 'react-router-dom';
+import {useMouseClick} from '../../../utils/handleAudioEffects';
 const Hero = () => {
+  const playMouseClick = useMouseClick ();
   return (
     <section className="pt-14 flex justify-center items-center text-center bg-[url(https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/bg-gradient-4.svg)] bg-center bg-cover">
       <div className="flex flex-col items-center">
@@ -18,11 +20,15 @@ const Hero = () => {
         <div className="flex justify-center mt-5 gap-4">
           <Link to="/slides/create">
             <Button
+              onClick={playMouseClick}
               btn_title="Start Creating"
               icon={<ArrowRight size={34} />}
             />
           </Link>
-          <button className="bg-white/10 border border-white/15 rounded-xl hover:opacity-75 px-6 py-3 text-white">
+          <button
+            onClick={playMouseClick}
+            className="bg-white/10 border border-white/15 rounded-xl hover:opacity-75 px-6 py-3 text-white"
+          >
             Learn More
           </button>
         </div>

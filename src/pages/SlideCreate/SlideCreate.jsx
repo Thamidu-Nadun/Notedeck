@@ -6,11 +6,14 @@ import './SlideCreate.css';
 import {useLocalMarkdown} from '../../hooks/useLocalMarkdown';
 import {from_github} from '../../utils/remoteMD.js';
 import {error, success} from '../../Components/Toast/toastUtils';
+import {useMouseClick} from '../../utils/handleAudioEffects.js';
+
 const SlideCreate = () => {
   const [markdown, setMarkdown] = useState ('');
   const navigate = useNavigate ();
   const urlRef = useRef ();
   const localMarkdown = useLocalMarkdown ();
+  const play_mouse_click = useMouseClick ();
 
   let placeholder = `## Slide 1 Title
 ---
@@ -28,9 +31,13 @@ const SlideCreate = () => {
    * Import markdown file from GitHub URL
    */
   const import_markdown_from_github = async () => {
+    // play sound
+    play_mouse_click ();
+
     let url = urlRef.current.value;
-    console.log (url);
-    from_github (urlRef.current.value).then (data => {
+    if (!url) return;
+
+    from_github (url).then (data => {
       if (data) {
         setMarkdown (data);
         success (
@@ -54,6 +61,11 @@ const SlideCreate = () => {
    * Save markdown to localStorage and navigate to slides view
    */
   const submitMarkdown = () => {
+    // play sound
+    play_mouse_click ();
+
+    if (!markdown) return;
+
     localMarkdown.saveMarkdown (markdown);
     navigate ('/slides/actions', {state: {markdown}});
     console.log (markdown);

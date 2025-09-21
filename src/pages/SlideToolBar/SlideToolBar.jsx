@@ -3,6 +3,7 @@ import {Crown, Download, Eye, CloudUpload} from 'lucide-react';
 import MainLayout from '../../layout/MainLayout';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {useLocalMarkdown} from '../../hooks/useLocalMarkdown.js';
+import {useMouseClick} from '../../utils/handleAudioEffects.js';
 
 const defaultMarkdownContent = `
 # Sample Presentation
@@ -19,14 +20,15 @@ This is a sample presentation generated from markdown.
 `;
 
 /**
- * SlideToolBar Component
- * @param {Object} Location State: {markdown} - React Router location object
- * @returns {JSX.Element}
- * */
+* SlideToolBar Component
+* @param {Object} Location State: {markdown} - React Router location object
+* @returns {JSX.Element}
+* */
 const SlideToolBar = () => {
   const location = useLocation ();
   const navigate = useNavigate ();
   const localMarkdown = useLocalMarkdown ();
+  const play_mouse_click = useMouseClick ();
 
   const markdown =
     location.state.markdown ||
@@ -34,13 +36,17 @@ const SlideToolBar = () => {
     defaultMarkdownContent;
   const handleActions = {
     handlePreview: () => {
+      play_mouse_click ();
       navigate ('/slides', {state: {markdown}});
     },
     handleExport: () => {
+      play_mouse_click ();
       // navigate ('/slides?print-pdf', {state: {markdown}});
       window.open (`/slides?print-pdf`, '_blank');
     },
-    handleSaveToCloud: () => {},
+    handleSaveToCloud: () => {
+      play_mouse_click ();
+    },
   };
   useEffect (() => {
     console.log (location.state.markdown);
