@@ -1,5 +1,6 @@
 import React, {lazy, Suspense} from 'react';
 import {Route, Routes} from 'react-router-dom';
+import './index.css';
 
 const Home = lazy (() => import ('./pages/Home/Home'));
 const SlidesView = lazy (() => import ('./pages/SlidesView/SlidesView'));
